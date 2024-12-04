@@ -2,7 +2,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.File;
 
 public class Transaction {
     // Singleton instance
@@ -62,8 +65,22 @@ public class Transaction {
         }
     }
 
-    // Placeholder for displayTransactionHistory (if required in future tasks)
+    // Method to display the transaction history
     public void displayTransactionHistory() {
-        System.out.println("Transaction history functionality not yet implemented.");
+        File file = new File("transactions.txt");
+        if (!file.exists()) {
+            System.out.println("No transaction history found.");
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            System.out.println("=== Transaction History ===");
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading transaction history: " + e.getMessage());
+        }
     }
 }

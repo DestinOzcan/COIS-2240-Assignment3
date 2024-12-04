@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class LibraryManagement {
     private Library library = new Library();
 
@@ -23,7 +22,7 @@ public class LibraryManagement {
             System.out.println("3. Borrow Book");
             System.out.println("4. Return Book");
             System.out.println("5. View Borrowed Books");
-            System.out.println("6. View Transaction History");
+            System.out.println("6. View Transaction History"); // New menu option for transaction history
             System.out.println("7. Exit");
             System.out.println("===========================");
             System.out.print("Enter your choice: ");
@@ -33,30 +32,33 @@ public class LibraryManagement {
 
             switch (choice) {
                 case 1:
+                    // Add Member
                     System.out.print("Enter member ID: ");
                     int id = scanner.nextInt();
                     System.out.print("Enter member name: ");
                     String name = scanner.next();
-                    
                     scanner.nextLine();
 
                     Member newMember = new Member(id, name);
                     library.addMember(newMember);
                     System.out.println("Member added successfully.");
                     break;
+
                 case 2:
+                    // Add Book
                     System.out.print("Enter book ID: ");
                     id = scanner.nextInt();
                     System.out.print("Enter book title: ");
                     String title = scanner.next();
-                    
                     scanner.nextLine();
 
                     Book newBook = new Book(id, title);
                     library.addBook(newBook);
                     System.out.println("Book added to library successfully.");
                     break;
+
                 case 3:
+                    // Borrow Book
                     System.out.println("\n--- Available Members ---");
                     for (Member member : library.getMembers()) {
                         System.out.println(member.getId() + ". " + member.getName());
@@ -85,7 +87,9 @@ public class LibraryManagement {
                         System.out.println("Invalid member or book ID.");
                     }
                     break;
+
                 case 4:
+                    // Return Book
                     System.out.print("Enter member ID: ");
                     memberId = scanner.nextInt();
                     
@@ -103,7 +107,9 @@ public class LibraryManagement {
                         System.out.println("Invalid member or book ID.");
                     }
                     break;
+
                 case 5:
+                    // View Borrowed Books
                     System.out.print("Enter member ID: ");
                     memberId = scanner.nextInt();
                     scanner.nextLine();
@@ -119,13 +125,18 @@ public class LibraryManagement {
                         System.out.println("Invalid member ID.");
                     }
                     break;
+
                 case 6:
-                    transaction.displayTransactionHistory();
+                    // View Transaction History
+                    transaction.displayTransactionHistory(); // Display the transaction history
                     break;
+
                 case 7:
+                    // Exit
                     System.out.println("Exiting. Goodbye!");
                     running = false;
                     break;
+
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
