@@ -2,6 +2,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
+    // Singleton instance
+    private static Transaction instance;
+
+    // Private constructor to prevent instantiation
+    private Transaction() {}
+
+    // Public method to get the single instance of the Transaction class
+    public static Transaction getTransaction() {
+        if (instance == null) {
+            instance = new Transaction();
+        }
+        return instance;
+    }
 
     // Perform the borrowing of a book
     public static boolean borrowBook(Book book, Member member) {
@@ -33,5 +46,9 @@ public class Transaction {
     private static String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(new Date());
+    }
+    // Placeholder for displayTransactionHistory (if required in future tasks)
+    public void displayTransactionHistory() {
+        System.out.println("Transaction history functionality not yet implemented.");
     }
 }
