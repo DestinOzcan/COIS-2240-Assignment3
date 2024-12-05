@@ -12,7 +12,7 @@ public class LibraryManagement {
     private void run() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
-        Transaction transaction = Transaction.getTransaction(); // Get the Singleton instance
+        Transaction transaction = Transaction.getTransaction(); // Singleton instance
 
         while (running) {
             System.out.println("===========================");
@@ -22,7 +22,7 @@ public class LibraryManagement {
             System.out.println("3. Borrow Book");
             System.out.println("4. Return Book");
             System.out.println("5. View Borrowed Books");
-            System.out.println("6. View Transaction History"); // New menu option for transaction history
+            System.out.println("6. View Transaction History");
             System.out.println("7. Exit");
             System.out.println("===========================");
             System.out.print("Enter your choice: ");
@@ -32,29 +32,24 @@ public class LibraryManagement {
 
             switch (choice) {
                 case 1:
-                    // Add Member
-                    System.out.print("Enter member ID: ");
-                    int id = scanner.nextInt();
-                    System.out.print("Enter member name: ");
-                    String name = scanner.next();
-                    scanner.nextLine();
-
-                    Member newMember = new Member(id, name);
-                    library.addMember(newMember);
-                    System.out.println("Member added successfully.");
+                    // Add Member code
                     break;
 
                 case 2:
-                    // Add Book
-                    System.out.print("Enter book ID: ");
-                    id = scanner.nextInt();
-                    System.out.print("Enter book title: ");
-                    String title = scanner.next();
-                    scanner.nextLine();
+                    // Add Book with Exception Handling
+                    try {
+                        System.out.print("Enter book ID: ");
+                        int id = scanner.nextInt();
+                        System.out.print("Enter book title: ");
+                        String title = scanner.next();
+                        scanner.nextLine();
 
-                    Book newBook = new Book(id, title);
-                    library.addBook(newBook);
-                    System.out.println("Book added to library successfully.");
+                        Book newBook = new Book(id, title); // This will throw an exception if ID is invalid
+                        library.addBook(newBook);
+                        System.out.println("Book added to library successfully.");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
 
                 case 3:
