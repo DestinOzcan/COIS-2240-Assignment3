@@ -20,6 +20,13 @@ public class LibraryManagementTest {
 
     @Test
     public void testBorrowReturn() {
+        // Add member and book to the library
+        library.addMember(member1);
+        library.addBook(book1);
+
+        // Ensure that the book is available before borrowing
+        assertTrue(book1.isAvailable());
+
         // Borrow the book and check if successful
         assertTrue(transaction.borrowBook(book1, member1)); // Book should be borrowed successfully
         assertFalse(book1.isAvailable()); // The book should no longer be available
@@ -34,6 +41,7 @@ public class LibraryManagementTest {
         // Try returning the book again (should fail)
         assertFalse(transaction.returnBook(book1, member1)); // Should fail since the book is not borrowed anymore
     }
+
     
     @Test
     public void testBookId() {
