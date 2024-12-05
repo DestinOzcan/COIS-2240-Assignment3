@@ -11,8 +11,16 @@ public class Transaction {
     // Singleton instance
     private static Transaction instance;
 
+    // Flag to prevent reflection-based instantiation
+    private static boolean instanceCreated = false;
+
     // Private constructor to prevent instantiation
-    private Transaction() {}
+    private Transaction() {
+        if (instanceCreated) {
+            throw new RuntimeException("Reflection not allowed to create multiple instances of Singleton");
+        }
+        instanceCreated = true; // Mark the instance as created
+    }
 
     // Public method to get the single instance of the Transaction class
     public static Transaction getTransaction() {

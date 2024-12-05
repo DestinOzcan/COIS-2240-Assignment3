@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 
 public class LibraryManagementTest {
 
@@ -10,7 +12,7 @@ public class LibraryManagementTest {
     private Transaction transaction;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         // Initialize objects before each test case
         library = new Library();
         member1 = new Member(1, "George");
@@ -42,7 +44,6 @@ public class LibraryManagementTest {
         assertFalse(transaction.returnBook(book1, member1)); // Should fail since the book is not borrowed anymore
     }
 
-    
     @Test
     public void testBookId() {
         try {
@@ -73,4 +74,11 @@ public class LibraryManagementTest {
             fail("Exception thrown unexpectedly: " + e.getMessage());
         }
     }
+
+    @Test
+	public void testSingletonTransaction() throws Exception {
+		Constructor<Transaction> constructor = Transaction.class.getDeclaredConstructor();
+		int privateModifier = constructor.getModifiers();
+		assertTrue("Constructor must be private", (privateModifier == 2));
+	}
 }
